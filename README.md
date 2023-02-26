@@ -21,7 +21,15 @@ network_bytes_sent{destination_ip="20.200.245.247"} 7344
 ## How to run
 
 ```bash
-$ docker run --rm -d --name exporter -v /sys/fs/cgroup:/sys/fs/cgroup --privileged -p 9000:9000 alicek106/network-exporter:0.0
+$ docker run --rm -d --name exporter -v /sys/fs/cgroup:/sys/fs/cgroup \
+  --privileged -p 9000:9000 alicek106/network-exporter:0.0
 
 $ curl localhost:9000/metrics
 ```
+
+## TODO
+- Network metrics per process
+- Optimization in main.go (e.g. dequeue keys from bpf map and acculumate again)
+
+## Disclaimer
+It is not for production usage. It exposes metrics with "ip" label, resulting in high cardinality at prometheus.
