@@ -17,3 +17,11 @@ network_bytes_sent{destination_ip="127.0.0.53"} 536
 network_bytes_sent{destination_ip="172.31.0.2"} 335
 network_bytes_sent{destination_ip="20.200.245.247"} 7344
 ```
+
+## How to run
+
+```bash
+$ docker run --rm -d --name exporter -v /sys/fs/cgroup:/sys/fs/cgroup --privileged -p 9000:9000 alicek106/network-exporter:0.0
+
+$ curl localhost:9000/metrics
+```
