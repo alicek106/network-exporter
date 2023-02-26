@@ -13,16 +13,18 @@
                                 ##__VA_ARGS__);                 \
 })
 
+// TODO: implement dequeue ip at main.go to prevent to be full of max_entries.
+// 나중에 할 것
 struct {
     __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 10);
+    __uint(max_entries, 256 * 1000);
     __uint(key_size, sizeof(__u32));
     __uint(value_size, sizeof(__u64));
 } count_egress_packets SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1);
+    __uint(max_entries, 256 * 1000);
     __uint(key_size, sizeof(__u32));
     __uint(value_size, sizeof(__u64));
 } count_ingress_packets SEC(".maps");
